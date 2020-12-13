@@ -27,4 +27,4 @@ class Pets(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
 
     def __repr__(self):
-        return f"Pet: [{self.name}, {self.specie}, {self.age}]"
+        return f"Pet: [name={self.name}, specie={self.specie}, age={self.age}]"

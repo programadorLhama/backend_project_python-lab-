@@ -1,1 +1,1 @@
-from .repositorys import UserRepository
+from .repositorys import UserRepository, PetRepository

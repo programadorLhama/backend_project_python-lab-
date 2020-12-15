@@ -35,8 +35,9 @@ def test_select_user():
     name = faker.name()
     password = faker.word()
     data = Users(id=user_id, name=name, password=password)
-    engine = db_connection_handler.get_engine()
 
+    # SQL commands
+    engine = db_connection_handler.get_engine()
     engine.execute(
         "INSERT INTO users (id, name, password) VALUES ('{}','{}', '{}');".format(
             user_id, name, password

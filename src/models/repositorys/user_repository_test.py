@@ -9,7 +9,7 @@ user_repository = UserRepository()
 
 
 def test_insert_user():
-    """ Should insert user in Users table and get it """
+    """ Should insert user in Users table and return it """
 
     name = faker.name()
     password = faker.word()
@@ -35,8 +35,9 @@ def test_select_user():
     name = faker.name()
     password = faker.word()
     data = Users(id=user_id, name=name, password=password)
-    engine = db_connection_handler.get_engine()
 
+    # SQL commands
+    engine = db_connection_handler.get_engine()
     engine.execute(
         "INSERT INTO users (id, name, password) VALUES ('{}','{}', '{}');".format(
             user_id, name, password

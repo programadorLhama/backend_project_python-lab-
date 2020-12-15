@@ -9,7 +9,7 @@ user_repository = UserRepository()
 
 
 def test_insert_user():
-    """ Should insert user in Users table and get it """
+    """ Should insert user in Users table and return it """
 
     name = faker.name()
     password = faker.word()

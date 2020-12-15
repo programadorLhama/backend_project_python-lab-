@@ -1,7 +1,7 @@
 # pylint: disable=E1101
 
 from collections import namedtuple
-from typing import Tuple
+from typing import Tuple, List
 from src.models.entities import Pets
 from src.models.configs import DBConnectionHandler
 
@@ -31,7 +31,11 @@ class PetRepository:
                 db_connection.session.commit()
 
                 return InsertData(
-                    id=new_pet.id, name=name, specie=specie, age=age, user_id=user_id
+                    id=new_pet.id,
+                    name=new_pet.name,
+                    specie=new_pet.specie.value,
+                    age=new_pet.age,
+                    user_id=new_pet.user_id,
                 )
 
             except:
@@ -39,3 +43,42 @@ class PetRepository:
                 raise
             finally:
                 db_connection.session.close()
+
+        return None
+
+    @classmethod
+    def select_pet(cls, pet_id: int = None, user_id: int = None) -> List[Pets]:
+        """
+        Select data in pets entity by id and/or user_id
+        :param  - id: Id of the registry
+                - name: User name in database
+        :return - List with pets selected
+        """
+
+        query_data = None
+
+        if pet_id and not user_id:
+            # Select pet by id
+            with DBConnectionHandler() as db_connection:
+                data = db_connection.session.query(Pets).filter_by(id=pet_id).one()
+                query_data = [data]
+
+        elif not pet_id and user_id:
+            # Select pet by user_id
+            with DBConnectionHandler() as db_connection:
+                data = (
+                    db_connection.session.query(Pets).filter_by(user_id=user_id).all()
+                )
+                query_data = data
+
+        elif pet_id and user_id:
+            # Select pet by pet_id and user_id:
+            with DBConnectionHandler() as db_connection:
+                data = (
+                    db_connection.session.query(Pets)
+                    .filter_by(id=pet_id, user_id=user_id)
+                    .one()
+                )
+                query_data = [data]
+
+        return query_data

@@ -11,9 +11,6 @@ class AnimalTypes(enum.Enum):
     fish = "fish"
     turtle = "turtle"
 
-    def __repr__(self):
-        return f"Types: [{self.dog}, {self.cat}, {self.fish}, {self.turtle}]"
-
 
 class Pets(Base):
     """ Pets Entity """

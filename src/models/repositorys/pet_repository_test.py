@@ -8,7 +8,7 @@ pet_repository = PetRepository()
 
 
 def test_insert_pet():
-    """ Should insert user in Users table and get it """
+    """ Should insert pet in Pet table and return it """
 
     name = faker.name()
     specie = "fish"

@@ -1,18 +1,17 @@
 # pylint: disable=E1101
 
-from typing import Tuple, List
+from typing import List
 from collections import namedtuple
 from src.models.entities import Pets
 from src.models.configs import DBConnectionHandler
+from src.data.interfaces import PetRepositoryInterface
 
 
-class PetRepository:
+class PetRepository(PetRepositoryInterface):
     """ Class to manage Pet Repository """
 
     @classmethod
-    def insert_pet(
-        cls, name: str, specie: str, age: int, user_id: int
-    ) -> Tuple[int, str, str, int, int]:
+    def insert_pet(cls, name: str, specie: str, age: int, user_id: int) -> Pets:
         """
         Insert data in pets entity
         :param  - name: person name

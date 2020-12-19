@@ -1,11 +1,12 @@
-from typing import Dict
+from typing import Dict, Type
+from src.models.repositorys import PetRepository
 
 
 class RegisterPet:
     """ Class to define usecase: Register Pet """
 
-    def __init__(self, PetRepository):
-        self.pet_repository = PetRepository
+    def __init__(self, pet_repository: Type[PetRepository]):
+        self.pet_repository = pet_repository
 
     def registry(self, name, specie, age, user_id) -> Dict[str, str]:
         """Registry pet

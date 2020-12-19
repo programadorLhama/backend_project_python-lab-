@@ -4,9 +4,10 @@ from collections import namedtuple
 from typing import List
 from src.models.entities import Users
 from src.models.configs import DBConnectionHandler
+from src.data.interfaces import UserRepositoryInterface
 
 
-class UserRepository:
+class UserRepository(UserRepositoryInterface):
     """ Class to manage User Repository """
 
     @classmethod

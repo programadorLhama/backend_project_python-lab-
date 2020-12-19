@@ -8,13 +8,15 @@ class RegisterPet:
     def __init__(self, pet_repository: Type[PetRepository]):
         self.pet_repository = pet_repository
 
-    def registry(self, name, specie, age, user_id) -> Dict[str, str]:
+    def registry(
+        self, name: str, specie: str, age: int, user_id: int
+    ) -> Dict[str, str]:
         """Registry pet
-        :param  - name: person name
-                - specie: Enum with species acepted
+        :param  - name: pet name
+                - specie: type of the specie
                 - age: age of the pet
                 - user_id: id of the owner (FK)
-        :return - tuple with new pet inserted informations
+        :return - Dictionary with sucess of the process
         """
 
         response = None

@@ -9,8 +9,8 @@ class Users(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    password = Column(String)
+    name = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=False)
     id_pet = relationship("Pets")
 
     def __repr__(self):

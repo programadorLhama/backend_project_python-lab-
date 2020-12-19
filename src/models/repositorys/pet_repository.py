@@ -1,7 +1,7 @@
 # pylint: disable=E1101
 
-from collections import namedtuple
 from typing import Tuple, List
+from collections import namedtuple
 from src.models.entities import Pets
 from src.models.configs import DBConnectionHandler
 

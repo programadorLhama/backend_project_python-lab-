@@ -1,16 +1,17 @@
 # pylint: disable=E1101
 
 from collections import namedtuple
-from typing import Tuple, List
+from typing import List
+from src.models.interfaces import UserRepositoryInterface
 from src.models.entities import Users
 from src.models.configs import DBConnectionHandler
 
 
-class UserRepository:
+class UserRepository(UserRepositoryInterface):
     """ Class to manage User Repository """
 
     @classmethod
-    def insert_user(cls, name: str, password: str) -> Tuple[int, str, str]:
+    def insert_user(cls, name: str, password: str) -> Users:
         """
         Insert data in user entity
         :param  - name: person name

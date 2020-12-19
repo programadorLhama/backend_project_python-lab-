@@ -2,12 +2,11 @@
 
 from collections import namedtuple
 from typing import List
-from src.domain.interfaces import UserRepositoryInterface
 from src.models.entities import Users
 from src.models.configs import DBConnectionHandler
 
 
-class UserRepository(UserRepositoryInterface):
+class UserRepository:
     """ Class to manage User Repository """
 
     @classmethod

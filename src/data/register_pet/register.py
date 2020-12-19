@@ -1,13 +1,13 @@
-from typing import Tuple
+from typing import Dict
 
 
 class RegisterPet:
     """ Class to define usecase: Register Pet """
 
     def __init__(self, PetRepository):
-        self.pet_repository = PetRepository()
+        self.pet_repository = PetRepository
 
-    def registry(self, name, specie, age, user_id) -> Tuple[int, str, str, int, int]:
+    def registry(self, name, specie, age, user_id) -> Dict[str, str]:
         """Registry pet
         :param  - name: person name
                 - specie: Enum with species acepted
@@ -16,12 +16,15 @@ class RegisterPet:
         :return - tuple with new pet inserted informations
         """
 
-        response = self.pet_repository.insert_pet(name, specie, age, user_id)
-        success = (
-            (response.name is name)
-            and (response.specie is specie)
-            and (response.age is age)
-            and (response.user_id is user_id)
+        response = None
+        validate_entry = (
+            isinstance(name, str)
+            and isinstance(specie, str)
+            and isinstance(age, int)
+            and isinstance(user_id, int or None)
         )
 
-        return {"Success": success, "Data": response}
+        if validate_entry:
+            response = self.pet_repository.insert_pet(name, specie, age, user_id)
+
+        return {"Success": validate_entry, "Data": response}

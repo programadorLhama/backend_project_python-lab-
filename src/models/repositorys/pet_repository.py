@@ -2,12 +2,11 @@
 
 from typing import Tuple, List
 from collections import namedtuple
-from src.domain.interfaces import PetRepositoryInterface
 from src.models.entities import Pets
 from src.models.configs import DBConnectionHandler
 
 
-class PetRepository(PetRepositoryInterface):
+class PetRepository:
     """ Class to manage Pet Repository """
 
     @classmethod

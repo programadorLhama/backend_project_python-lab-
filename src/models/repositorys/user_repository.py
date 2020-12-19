@@ -2,7 +2,7 @@
 
 from collections import namedtuple
 from typing import List
-from src.models.interfaces import UserRepositoryInterface
+from src.domain.interfaces import UserRepositoryInterface
 from src.models.entities import Users
 from src.models.configs import DBConnectionHandler
 

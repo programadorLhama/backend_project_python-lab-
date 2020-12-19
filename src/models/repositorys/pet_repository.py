@@ -2,7 +2,7 @@
 
 from typing import Tuple, List
 from collections import namedtuple
-from src.models.interfaces import PetRepositoryInterface
+from src.domain.interfaces import PetRepositoryInterface
 from src.models.entities import Pets
 from src.models.configs import DBConnectionHandler
 

@@ -1,7 +1,7 @@
 from typing import List
-from src.models.interfaces import UserRepositoryInterface
+from src.domain.interfaces import UserRepositoryInterface
 from src.models.entities import Users
-from .mock_user import mock_users
+from src.domain.test import mock_users
 
 
 class UserRepositorySpy(UserRepositoryInterface):

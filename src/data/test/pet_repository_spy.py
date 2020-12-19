@@ -1,7 +1,7 @@
 from typing import List
-from src.models.interfaces import PetRepositoryInterface
+from src.domain.interfaces import PetRepositoryInterface
 from src.models.entities import Pets
-from .mock_pet import mock_pet
+from src.domain.test import mock_pet
 
 
 class PetRepositorySpy(PetRepositoryInterface):

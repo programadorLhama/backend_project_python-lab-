@@ -21,3 +21,17 @@ class FindUser:
             response = self.user_repository.select_user(user_id=user_id)
 
         return {"Success": validate_entry, "Data": response}
+
+    def by_name(self, name: str) -> Dict[str, str]:
+        """Select User By name
+        :param - name: name of the user
+        :return - Dictionary with informations of the process
+        """
+
+        response = None
+        validate_entry = isinstance(name, str)
+
+        if validate_entry:
+            response = self.user_repository.select_user(name=name)
+
+        return {"Success": validate_entry, "Data": response}

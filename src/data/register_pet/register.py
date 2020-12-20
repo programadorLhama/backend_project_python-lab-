@@ -16,7 +16,7 @@ class RegisterPet:
                 - specie: type of the specie
                 - age: age of the pet
                 - user_id: id of the owner (FK)
-        :return - Dictionary with sucess of the process
+        :return - Dictionary with informations of the process
         """
 
         response = None

@@ -12,7 +12,7 @@ class RegisterUser:
         """Registry user
         :param  - name: person name
                 - password: password of the person
-        :return - Dictionary with sucess of the process
+        :return - Dictionary with informations of the process
         """
 
         response = None

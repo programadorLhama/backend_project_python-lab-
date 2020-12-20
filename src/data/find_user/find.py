@@ -37,7 +37,7 @@ class FindUser:
         return {"Success": validate_entry, "Data": response}
 
     def by_id_and_user(self, user_id: int, name: str) -> Dict[str, str]:
-        """Select User By name
+        """Select User By id and name
         :param - name: name of the user
         :return - Dictionary with informations of the process
         """

@@ -1,5 +1,5 @@
 from typing import Dict, Type
-from src.infra import UserRepository
+from src.data.interfaces import UserRepositoryInterface as UserRepository
 
 
 class FindUser:

@@ -1,5 +1,5 @@
 from typing import List
-from src.models.entities import Users
+from src.infra.entities import Users
 from src.domain.test import mock_users
 
 

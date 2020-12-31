@@ -2,8 +2,8 @@
 
 from collections import namedtuple
 from typing import List
-from src.models.entities import Users
-from src.models.configs import DBConnectionHandler
+from src.infra.entities import Users
+from src.infra.configs import DBConnectionHandler
 from src.data.interfaces import UserRepositoryInterface
 
 

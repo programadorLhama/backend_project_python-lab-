@@ -1,5 +1,5 @@
 from typing import Dict, Type
-from src.models import UserRepository
+from src.infra import UserRepository
 
 
 class RegisterUser:

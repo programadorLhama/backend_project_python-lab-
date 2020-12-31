@@ -1,7 +1,7 @@
 from faker import Faker
-from src.models.entities import Pets
-from src.models.entities.pets import AnimalTypes
-from src.models.configs import DBConnectionHandler
+from src.infra.entities import Pets
+from src.infra.entities.pets import AnimalTypes
+from src.infra.configs import DBConnectionHandler
 from .pet_repository import PetRepository
 
 faker = Faker()

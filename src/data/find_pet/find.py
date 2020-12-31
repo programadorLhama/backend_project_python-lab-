@@ -1,5 +1,5 @@
 from typing import Dict, Type
-from src.models import PetRepository
+from src.infra import PetRepository
 
 
 class FindPet:

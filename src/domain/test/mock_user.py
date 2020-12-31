@@ -1,6 +1,6 @@
 from collections import namedtuple
 from faker import Faker
-from src.models.entities import Users
+from src.infra.entities import Users
 
 faker = Faker()
 

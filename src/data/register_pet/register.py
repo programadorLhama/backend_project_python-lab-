@@ -1,5 +1,5 @@
 from typing import Dict, Type
-from src.models.repositorys import PetRepository
+from src.infra.repositorys import PetRepository
 
 
 class RegisterPet:

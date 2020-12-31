@@ -1,9 +1,9 @@
 # pylint: disable=E1101
 
 from typing import List
-from collections import namedtuple
-from src.infra.entities import Pets
+from src.infra.entities import Pets as PetsEntity
 from src.infra.configs import DBConnectionHandler
+from src.domain.models import Pets
 from src.data.interfaces import PetRepositoryInterface
 
 
@@ -13,7 +13,7 @@ class PetRepository(PetRepositoryInterface):
     @classmethod
     def insert_pet(cls, name: str, specie: str, age: int, user_id: int) -> Pets:
         """
-        Insert data in pets entity
+        Insert data in PetsEntity entity
         :param  - name: person name
                 - specie: Enum with species acepted
                 - age: age of the pet
@@ -21,15 +21,13 @@ class PetRepository(PetRepositoryInterface):
         :return - tuple with new pet inserted informations
         """
 
-        InsertData = namedtuple("Pets", "id name specie age user_id")
-
         with DBConnectionHandler() as db_connection:
             try:
-                new_pet = Pets(name=name, specie=specie, age=age, user_id=user_id)
+                new_pet = PetsEntity(name=name, specie=specie, age=age, user_id=user_id)
                 db_connection.session.add(new_pet)
                 db_connection.session.commit()
 
-                return InsertData(
+                return Pets(
                     id=new_pet.id,
                     name=new_pet.name,
                     specie=new_pet.specie.value,
@@ -48,10 +46,10 @@ class PetRepository(PetRepositoryInterface):
     @classmethod
     def select_pet(cls, pet_id: int = None, user_id: int = None) -> List[Pets]:
         """
-        Select data in pets entity by id and/or user_id
+        Select data in PetsEntity entity by id and/or user_id
         :param  - id: Id of the registry
                 - name: User name in database
-        :return - List with pets selected
+        :return - List with PetsEntity selected
         """
 
         query_data = None
@@ -59,14 +57,18 @@ class PetRepository(PetRepositoryInterface):
         if pet_id and not user_id:
             # Select pet by id
             with DBConnectionHandler() as db_connection:
-                data = db_connection.session.query(Pets).filter_by(id=pet_id).one()
+                data = (
+                    db_connection.session.query(PetsEntity).filter_by(id=pet_id).one()
+                )
                 query_data = [data]
 
         elif not pet_id and user_id:
             # Select pet by user_id
             with DBConnectionHandler() as db_connection:
                 data = (
-                    db_connection.session.query(Pets).filter_by(user_id=user_id).all()
+                    db_connection.session.query(PetsEntity)
+                    .filter_by(user_id=user_id)
+                    .all()
                 )
                 query_data = data
 
@@ -74,7 +76,7 @@ class PetRepository(PetRepositoryInterface):
             # Select pet by pet_id and user_id:
             with DBConnectionHandler() as db_connection:
                 data = (
-                    db_connection.session.query(Pets)
+                    db_connection.session.query(PetsEntity)
                     .filter_by(id=pet_id, user_id=user_id)
                     .one()
                 )

@@ -1,5 +1,5 @@
 from typing import List
-from src.infra.entities import Pets
+from src.domain.models import Pets
 from src.domain.test import mock_pet
 
 

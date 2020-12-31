@@ -1,6 +1,5 @@
-from collections import namedtuple
 from faker import Faker
-from src.infra.entities import Pets
+from src.domain.models import Pets
 
 faker = Faker()
 
@@ -11,8 +10,7 @@ def mock_pet() -> Pets:
     :return - Fake Pet registry
     """
 
-    InsertData = namedtuple("Pets", "id name specie age user_id")
-    return InsertData(
+    return Pets(
         id=faker.random_number(digits=5),
         name=faker.name(),
         specie="dog",

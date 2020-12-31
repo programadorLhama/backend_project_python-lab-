@@ -1,6 +1,5 @@
-from collections import namedtuple
 from faker import Faker
-from src.infra.entities import Users
+from src.domain.models import Users
 
 faker = Faker()
 
@@ -11,7 +10,6 @@ def mock_users() -> Users:
     :param Fake User registry
     """
 
-    InsertData = namedtuple("Users", "id name password")
-    return InsertData(
+    return Users(
         id=faker.random_number(digits=5), name=faker.name(), password=faker.name()
     )

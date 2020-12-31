@@ -1,8 +1,8 @@
 # pylint: disable=E1101
 
-from collections import namedtuple
 from typing import List
-from src.infra.entities import Users
+from src.domain.models import Users
+from src.infra.entities import Users as UsersModel
 from src.infra.configs import DBConnectionHandler
 from src.data.interfaces import UserRepositoryInterface
 
@@ -20,15 +20,14 @@ class UserRepository(UserRepositoryInterface):
         """
 
         # Creating a Return Tuple With Informations
-        InsertData = namedtuple("Users", "id name password")
 
         with DBConnectionHandler() as db_connection:
             try:
-                new_user = Users(name=name, password=password)
+                new_user = UsersModel(name=name, password=password)
                 db_connection.session.add(new_user)
                 db_connection.session.commit()
 
-                return InsertData(
+                return Users(
                     id=new_user.id, name=new_user.name, password=new_user.password
                 )
 
@@ -46,7 +45,7 @@ class UserRepository(UserRepositoryInterface):
         Select data in user entity by id and/or name
         :param  - id: Id of the registry
                 - name: User name in database
-        :return - List with users selected
+        :return - List with UsersModel selected
         """
 
         try:
@@ -56,7 +55,9 @@ class UserRepository(UserRepositoryInterface):
                 # Select user by id
                 with DBConnectionHandler() as db_connection:
                     data = (
-                        db_connection.session.query(Users).filter_by(id=user_id).one()
+                        db_connection.session.query(UsersModel)
+                        .filter_by(id=user_id)
+                        .one()
                     )
                     query_data = [data]
 
@@ -64,14 +65,16 @@ class UserRepository(UserRepositoryInterface):
                 # Select user by name
                 with DBConnectionHandler() as db_connection:
                     query_data = (
-                        db_connection.session.query(Users).filter_by(name=name).all()
+                        db_connection.session.query(UsersModel)
+                        .filter_by(name=name)
+                        .all()
                     )
 
             elif user_id and name:
                 # Select user by id and name
                 with DBConnectionHandler() as db_connection:
                     data = (
-                        db_connection.session.query(Users)
+                        db_connection.session.query(UsersModel)
                         .filter_by(id=user_id, name=name)
                         .one()
                     )

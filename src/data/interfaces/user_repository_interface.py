@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
-from src.infra.entities import Users
+from src.domain.models import Users
 
 
 class UserRepositoryInterface(ABC):

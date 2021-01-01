@@ -1,8 +1,9 @@
 from typing import Dict, Type
 from src.data.interfaces import PetRepositoryInterface as PetRepository
+from src.domain.use_cases import RegisterPet as RegistryPetInterface
 
 
-class RegisterPet:
+class RegisterPet(RegistryPetInterface):
     """ Class to define usecase: Register Pet """
 
     def __init__(self, pet_repository: Type[PetRepository]):

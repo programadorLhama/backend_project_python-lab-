@@ -1,8 +1,9 @@
 from typing import Dict, Type
 from src.data.interfaces import UserRepositoryInterface as UserRepository
+from src.domain.use_cases import RegisterUser as RegisterUserInterface
 
 
-class RegisterUser:
+class RegisterUser(RegisterUserInterface):
     """ Class to define usecase: Register User """
 
     def __init__(self, user_repository: Type[UserRepository]):

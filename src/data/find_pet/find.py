@@ -1,9 +1,10 @@
 from typing import Dict, Type
 from src.data.interfaces import PetRepositoryInterface as PetRepository
+from src.domain.use_cases import FindPet as FindPetInterface
 
 
-class FindPet:
-    """ Class to define usecase: Select Pet """
+class FindPet(FindPetInterface):
+    """ Class to define usecase: Find Pet """
 
     def __init__(self, pet_repository: Type[PetRepository]):
         self.pet_repository = pet_repository

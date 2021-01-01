@@ -1,8 +1,9 @@
 from typing import Dict, Type
 from src.data.interfaces import UserRepositoryInterface as UserRepository
+from src.domain.use_cases import FindUser as FindUserInterface
 
 
-class FindUser:
+class FindUser(FindUserInterface):
     """ Class to define usecase: Select User """
 
     def __init__(self, user_repository: Type[UserRepository]):

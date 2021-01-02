@@ -1,5 +1,6 @@
 from faker import Faker
-from src.data.test import PetRepositorySpy, UserRepositorySpy, FindUserMock
+from src.infra.test import PetRepositorySpy, UserRepositorySpy
+from src.data.test import FindUserSpy
 from .register import RegisterPet
 
 faker = Faker()
@@ -9,7 +10,7 @@ def test_registry():
     """ Testing registry method in RegisterPet """
 
     pet_repo = PetRepositorySpy()
-    find_user = FindUserMock(UserRepositorySpy())
+    find_user = FindUserSpy(UserRepositorySpy())
     registry_pet = RegisterPet(pet_repo, find_user)
 
     attributes = {
@@ -38,6 +39,16 @@ def test_registry():
         == attributes["user_information"]["user_id"]
     )
 
+    # Testing FindUser Inputs
+    assert (
+        find_user.by_id_and_user_param["user_id"]
+        == attributes["user_information"]["user_id"]
+    )
+    assert (
+        find_user.by_id_and_user_param["name"]
+        == attributes["user_information"]["user_name"]
+    )
+
     # Testing Outputs
     assert response["Success"] is True
     assert response["Data"]
@@ -47,7 +58,7 @@ def test_registry_fail_attributes():
     """ Testing registry fail method in RegisterPet by attributes """
 
     pet_repo = PetRepositorySpy()
-    find_user = FindUserMock(UserRepositorySpy())
+    find_user = FindUserSpy(UserRepositorySpy())
     registry_pet = RegisterPet(pet_repo, find_user)
 
     attributes = {
@@ -79,7 +90,7 @@ def test_registry_fail_user():
     """ Testing registry fail method in RegisterPet by user search """
 
     pet_repo = PetRepositorySpy()
-    find_user = FindUserMock(UserRepositorySpy())
+    find_user = FindUserSpy(UserRepositorySpy())
     registry_pet = RegisterPet(pet_repo, find_user)
 
     attributes = {
@@ -101,6 +112,16 @@ def test_registry_fail_user():
 
     # Testing Inputs
     assert pet_repo.insert_pet_param == {}
+
+    # Testing FindUser Inputs
+    assert (
+        find_user.by_id_and_user_param["user_id"]
+        == attributes["user_information"]["user_id"]
+    )
+    assert (
+        find_user.by_id_and_user_param["name"]
+        == attributes["user_information"]["user_name"]
+    )
 
     # Testing Outputs
     assert response["Success"] is False

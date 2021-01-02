@@ -1,3 +1,2 @@
-from .pet_repository_spy import PetRepositorySpy
-from .user_repository_spy import UserRepositorySpy
-from .find_user_mock import FindUserMock
+from .find_user_spy import FindUserSpy
+from .find_pet_spy import FindPetSpy

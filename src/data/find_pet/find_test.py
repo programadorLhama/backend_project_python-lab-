@@ -1,5 +1,5 @@
 from faker import Faker
-from src.data.test import PetRepositorySpy
+from src.infra.test import PetRepositorySpy
 from .find import FindPet
 
 faker = Faker()

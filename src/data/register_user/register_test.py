@@ -1,5 +1,5 @@
 from faker import Faker
-from src.data.test import UserRepositorySpy
+from src.infra.test import UserRepositorySpy
 from .register import RegisterUser
 
 faker = Faker()

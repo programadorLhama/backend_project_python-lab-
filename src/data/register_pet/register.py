@@ -13,7 +13,7 @@ class RegisterPet(RegistryPetInterface):
         self.find_user = find_user
 
     def registry(
-        self, name: str, specie: str, age: int, user_information: Dict[int, str]
+        self, name: str, specie: str, user_information: Dict[int, str], age: int = None
     ) -> Dict[bool, Pets]:
         """Registry pet
         :param  - name: pet name
@@ -26,9 +26,7 @@ class RegisterPet(RegistryPetInterface):
         response = None
 
         # Validating entry and trying to find an user
-        validate_entry = (
-            isinstance(name, str) and isinstance(specie, str) and isinstance(age, int)
-        )
+        validate_entry = isinstance(name, str) and isinstance(specie, str)
         user = self.__find_user_information(user_information)
         checker = validate_entry and user["Success"]
 
@@ -50,7 +48,7 @@ class RegisterPet(RegistryPetInterface):
         user_founded = None
         user_params = user_information.keys()
 
-        if "user_id" and "user_name" in user_params:
+        if "user_id" in user_params and "user_name" in user_params:
             # find user by id and name
             user_founded = self.find_user.by_id_and_user(
                 user_information["user_id"], user_information["user_name"]

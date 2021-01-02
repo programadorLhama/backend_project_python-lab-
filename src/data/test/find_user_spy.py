@@ -20,7 +20,7 @@ class FindUserSpy:
         validate_entry = isinstance(user_id, int)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": [mock_users()]}
+            response = [mock_users()]
 
         return {"Success": validate_entry, "Data": response}
 
@@ -32,7 +32,7 @@ class FindUserSpy:
         validate_entry = isinstance(name, str)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": [mock_users()]}
+            response = [mock_users()]
 
         return {"Success": validate_entry, "Data": response}
 
@@ -45,6 +45,6 @@ class FindUserSpy:
         validate_entry = isinstance(user_id, int) and isinstance(name, str)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": [mock_users()]}
+            response = [mock_users()]
 
         return {"Success": validate_entry, "Data": response}

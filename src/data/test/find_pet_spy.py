@@ -20,7 +20,7 @@ class FindPetSpy:
         validate_entry = isinstance(pet_id, int)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": mock_pet()}
+            response = [mock_pet()]
 
         return {"Success": validate_entry, "Data": response}
 
@@ -32,7 +32,7 @@ class FindPetSpy:
         validate_entry = isinstance(user_id, int)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": mock_pet()}
+            response = [mock_pet()]
 
         return {"Success": validate_entry, "Data": response}
 
@@ -47,6 +47,6 @@ class FindPetSpy:
         validate_entry = isinstance(user_id, int) and isinstance(pet_id, int)
 
         if validate_entry:
-            response = {"Success": validate_entry, "Data": mock_pet()}
+            response = [mock_pet()]
 
         return {"Success": validate_entry, "Data": response}

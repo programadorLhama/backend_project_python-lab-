@@ -20,7 +20,7 @@ class FindPetRouter:
 
             query_string_params = http_request.query.keys()
 
-            if "pet_id" and "user_id" in query_string_params:
+            if "pet_id" in query_string_params and "user_id" in query_string_params:
                 pet_id = http_request.query["pet_id"]
                 user_id = http_request.query["user_id"]
                 response = self.find_pet_use_case.by_pet_id_and_user_id(

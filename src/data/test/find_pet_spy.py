@@ -15,7 +15,7 @@ class FindPetSpy:
     def by_pet_id(self, pet_id: int) -> Dict[bool, List[Pets]]:
         """ Select Pet By pet_id """
 
-        self.by_pet_id_and_user_id_param["pet_id"] = pet_id
+        self.by_pet_id_param["pet_id"] = pet_id
         response = None
         validate_entry = isinstance(pet_id, int)
 

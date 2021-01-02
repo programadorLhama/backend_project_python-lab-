@@ -8,7 +8,7 @@ faker = Faker()
 
 
 def test_route():
-    """ Testing route method in FindPetRouter """
+    """ Testing route method in FindUserRouter """
 
     find_user_use_case = FindUserSpy(UserRepositorySpy())
     find_user_router = FindUserRouter(find_user_use_case)
@@ -26,7 +26,7 @@ def test_route():
 
 
 def test_route_by_id():
-    """ Testing route method in FindPetRouter """
+    """ Testing route method in FindUserRouter """
 
     find_user_use_case = FindUserSpy(UserRepositorySpy())
     find_user_router = FindUserRouter(find_user_use_case)
@@ -43,7 +43,7 @@ def test_route_by_id():
 
 
 def test_route_by_name():
-    """ Testing route method in FindPetRouter """
+    """ Testing route method in FindUserRouter """
 
     find_user_use_case = FindUserSpy(UserRepositorySpy())
     find_user_router = FindUserRouter(find_user_use_case)
@@ -60,7 +60,7 @@ def test_route_by_name():
 
 
 def test_route_error_no_query():
-    """ Testing route method in FindPetRouter """
+    """ Testing route method in FindUserRouter """
 
     find_user_use_case = FindUserSpy(UserRepositorySpy())
     find_user_router = FindUserRouter(find_user_use_case)
@@ -78,7 +78,7 @@ def test_route_error_no_query():
 
 
 def test_route_error_wrong_query():
-    """ Testing route method in FindPetRouter """
+    """ Testing route method in FindUserRouter """
 
     find_user_use_case = FindUserSpy(UserRepositorySpy())
     find_user_router = FindUserRouter(find_user_use_case)

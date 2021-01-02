@@ -1,6 +1,7 @@
-from typing import Dict, Type
+from typing import Dict, List, Type
 from src.data.interfaces import UserRepositoryInterface as UserRepository
 from src.domain.use_cases import FindUser as FindUserInterface
+from src.domain.models import Users
 
 
 class FindUser(FindUserInterface):
@@ -9,7 +10,7 @@ class FindUser(FindUserInterface):
     def __init__(self, user_repository: Type[UserRepository]):
         self.user_repository = user_repository
 
-    def by_id(self, user_id: int) -> Dict[str, str]:
+    def by_id(self, user_id: int) -> Dict[bool, List[Users]]:
         """Select User By id
         :param - user_id: id of the user
         :return - Dictionary with informations of the process
@@ -23,7 +24,7 @@ class FindUser(FindUserInterface):
 
         return {"Success": validate_entry, "Data": response}
 
-    def by_name(self, name: str) -> Dict[str, str]:
+    def by_name(self, name: str) -> Dict[bool, List[Users]]:
         """Select User By name
         :param - name: name of the user
         :return - Dictionary with informations of the process
@@ -37,7 +38,7 @@ class FindUser(FindUserInterface):
 
         return {"Success": validate_entry, "Data": response}
 
-    def by_id_and_user(self, user_id: int, name: str) -> Dict[str, str]:
+    def by_id_and_user(self, user_id: int, name: str) -> Dict[bool, List[Users]]:
         """Select User By id and name
         :param - name: name of the user
         :return - Dictionary with informations of the process

@@ -1,7 +1,8 @@
-from typing import Dict, Type
+from typing import Dict, List, Type
+from src.data.find_user import FindUser
 from src.data.interfaces import PetRepositoryInterface as PetRepository
 from src.domain.use_cases import RegisterPet as RegistryPetInterface
-from src.data.find_user import FindUser
+from src.domain.models import Users, Pets
 
 
 class RegisterPet(RegistryPetInterface):
@@ -13,7 +14,7 @@ class RegisterPet(RegistryPetInterface):
 
     def registry(
         self, name: str, specie: str, age: int, user_information: Dict[int, str]
-    ) -> Dict[str, str]:
+    ) -> Dict[bool, Pets]:
         """Registry pet
         :param  - name: pet name
                 - specie: type of the specie
@@ -38,7 +39,9 @@ class RegisterPet(RegistryPetInterface):
 
         return {"Success": checker, "Data": response}
 
-    def __find_user_information(self, user_information: Dict[int, str]):
+    def __find_user_information(
+        self, user_information: Dict[int, str]
+    ) -> Dict[bool, List[Users]]:
         """ Check userInfo Dicionaty and select user """
 
         user_founded = None

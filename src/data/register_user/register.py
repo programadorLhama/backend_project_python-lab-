@@ -1,6 +1,7 @@
 from typing import Dict, Type
 from src.data.interfaces import UserRepositoryInterface as UserRepository
 from src.domain.use_cases import RegisterUser as RegisterUserInterface
+from src.domain.models import Users
 
 
 class RegisterUser(RegisterUserInterface):
@@ -9,7 +10,7 @@ class RegisterUser(RegisterUserInterface):
     def __init__(self, user_repository: Type[UserRepository]):
         self.user_repository = user_repository
 
-    def registry(self, name: str, password: str) -> Dict[str, str]:
+    def registry(self, name: str, password: str) -> Dict[bool, Users]:
         """Registry user
         :param  - name: person name
                 - password: password of the person

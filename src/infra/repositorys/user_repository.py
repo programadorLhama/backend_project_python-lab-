@@ -64,11 +64,12 @@ class UserRepository(UserRepositoryInterface):
             elif not user_id and name:
                 # Select user by name
                 with DBConnectionHandler() as db_connection:
-                    query_data = (
+                    data = (
                         db_connection.session.query(UsersModel)
                         .filter_by(name=name)
                         .all()
                     )
+                    query_data = data
 
             elif user_id and name:
                 # Select user by id and name

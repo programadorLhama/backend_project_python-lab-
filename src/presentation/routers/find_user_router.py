@@ -1,14 +1,14 @@
 from typing import Type
-from src.data import FindPet
+from src.data import FindUser
 from src.main.adapters import HttpRequest, HttpResponse
 from src.presentation.errors import HttpErrors
 
 
-class FindPetRouter:
-    """ Class to define Route to find_pet use case """
+class FindUserRouter:
+    """ Class to Define Route to find_user use case """
 
-    def __init__(self, find_pet_use_case: Type[FindPet]):
-        self.find_pet_use_case = find_pet_use_case
+    def __init__(self, find_user_use_case: Type[FindUser]):
+        self.find_user_use_case = find_user_use_case
 
     def route(self, http_request: Type[HttpRequest]):
         """ Method to call use case """
@@ -20,24 +20,26 @@ class FindPetRouter:
 
             query_string_params = http_request.query.keys()
 
-            if "pet_id" and "user_id" in query_string_params:
-                pet_id = http_request.query["pet_id"]
+            if "user_id" and "user_name" in query_string_params:
                 user_id = http_request.query["user_id"]
-                response = self.find_pet_use_case.by_pet_id_and_user_id(
-                    pet_id=pet_id, user_id=user_id
+                user_name = http_request.query["user_name"]
+                response = self.find_user_use_case.by_id_and_user(
+                    user_id=user_id, user_name=user_name
                 )
 
             elif (
-                "pet_id" in query_string_params and "user_id" not in query_string_params
-            ):
-                pet_id = http_request.query["pet_id"]
-                response = self.find_pet_use_case.by_pet_id(pet_id=pet_id)
-
-            elif (
-                "user_id" in query_string_params and "pet_id" not in query_string_params
+                "user_id" in query_string_params
+                and "user_name" not in query_string_params
             ):
                 user_id = http_request.query["user_id"]
-                response = self.find_pet_use_case.by_user_id(user_id=user_id)
+                response = self.find_user_use_case.by_id(user_id=user_id)
+
+            elif (
+                "user_name" in query_string_params
+                and "user_id" not in query_string_params
+            ):
+                user_name = http_request.query["user_name"]
+                response = self.find_user_use_case.by_name(user_name=user_name)
 
             else:
                 response = {"Success": False, "Data": None}

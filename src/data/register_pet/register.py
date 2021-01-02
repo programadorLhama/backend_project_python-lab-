@@ -19,7 +19,7 @@ class RegisterPet(RegistryPetInterface):
         :param  - name: pet name
                 - specie: type of the specie
                 - age: age of the pet
-                - user_id: id of the owner (FK)
+                - user_information: Dictionary with user_id and/or user_name
         :return - Dictionary with informations of the process
         """
 
@@ -42,7 +42,10 @@ class RegisterPet(RegistryPetInterface):
     def __find_user_information(
         self, user_information: Dict[int, str]
     ) -> Dict[bool, List[Users]]:
-        """ Check userInfo Dicionaty and select user """
+        """Check userInfo Dicionaty and select user
+        :param - user_information: Dictionary with user_id and/or user_name
+        :return - Dictionary with the response of find_user use case
+        """
 
         user_founded = None
         user_params = user_information.keys()

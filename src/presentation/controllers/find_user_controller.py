@@ -1,6 +1,6 @@
 from typing import Type
 from src.data import FindUser
-from src.main.adapters import HttpRequest, HttpResponse
+from src.presentation.helpers import HttpRequest, HttpResponse
 from src.presentation.errors import HttpErrors
 
 

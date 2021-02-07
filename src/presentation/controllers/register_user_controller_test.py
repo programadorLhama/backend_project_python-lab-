@@ -1,8 +1,8 @@
 from faker import Faker
 from src.data.test import RegisterUserSpy
-from src.main.adapters import HttpRequest
+from src.presentation.helpers import HttpRequest
 from src.infra.test import UserRepositorySpy
-from .register_user_router import RegisterUserRouter
+from .register_user_controller import RegisterUserRouter
 
 faker = Faker()
 

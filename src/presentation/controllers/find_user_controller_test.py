@@ -1,8 +1,8 @@
 from faker import Faker
 from src.data.test import FindUserSpy
 from src.infra.test import UserRepositorySpy
-from src.main.adapters import HttpRequest
-from .find_user_router import FindUserRouter
+from src.presentation.helpers import HttpRequest
+from .find_user_controller import FindUserRouter
 
 faker = Faker()
 

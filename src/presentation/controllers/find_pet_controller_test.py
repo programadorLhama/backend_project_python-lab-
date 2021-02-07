@@ -1,8 +1,8 @@
 from faker import Faker
 from src.data.test import FindPetSpy
 from src.infra.test import PetRepositorySpy
-from src.main.adapters import HttpRequest
-from .find_pet_router import FindPetRouter
+from src.presentation.helpers import HttpRequest
+from .find_pet_controller import FindPetRouter
 
 faker = Faker()
 

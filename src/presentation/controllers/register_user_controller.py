@@ -1,16 +1,17 @@
 from typing import Type
+from src.main.interface import RouteInterface
 from src.data import RegisterUser
 from src.presentation.helpers import HttpRequest, HttpResponse
 from src.presentation.errors import HttpErrors
 
 
-class RegisterUserRouter:
+class RegisterUserRouter(RouteInterface):
     """ Class to Define Route to register_user use case """
 
     def __init__(self, register_user_use_case: Type[RegisterUser]):
         self.register_user_use_case = register_user_use_case
 
-    def route(self, http_request: Type[HttpRequest]):
+    def route(self, http_request: Type[HttpRequest]) -> HttpResponse:
         """ Method to call use case """
 
         response = None

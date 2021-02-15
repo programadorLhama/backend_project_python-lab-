@@ -9,9 +9,12 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
     """
 
     http_request = HttpRequest (
-        header=request.header,
-        body=request.body,
-        query=request.query
+        header=request.headers,
+        body=request.json,
+        # request.args.to_dict()
+        query={
+            'user_id': int(request.args.get('user_id'))
+        }
     )
 
     response = api_route.route(http_request)

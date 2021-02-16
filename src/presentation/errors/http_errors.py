@@ -14,6 +14,12 @@ class HttpErrors:
         return {"status_code": 404, "body": {"error": "Not Found"}}
 
     @staticmethod
+    def error_409():
+        """ Http error 409 - Conflict """
+
+        return {"status_code": 409, "body": {"error": "Conflict"}}
+
+    @staticmethod
     def error_422():
         """ Http error 422 - Unprocessable Entity """
 

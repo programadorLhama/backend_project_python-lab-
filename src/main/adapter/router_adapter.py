@@ -1,5 +1,6 @@
 from typing import Type
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import IntegrityError
 from src.presentation.helpers import HttpRequest, HttpResponse
 from src.presentation.errors import HttpErrors
 from src.main.interface import RouteInterface as Route
@@ -18,6 +19,9 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
         # Formating information
         if "user_id" in query_string_params.keys():
             query_string_params["user_id"] = int(query_string_params["user_id"])
+
+        if "pet_id" in query_string_params.keys():
+            query_string_params["pet_id"] = int(query_string_params["pet_id"])
     except:
         https_error = HttpErrors.error_400()
         return HttpResponse(
@@ -33,6 +37,11 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
 
     except NoResultFound:
         https_error = HttpErrors.error_404()
+        return HttpResponse(
+            status_code=https_error["status_code"], body=https_error["body"]
+        )
+    except IntegrityError:
+        https_error = HttpErrors.error_409()
         return HttpResponse(
             status_code=https_error["status_code"], body=https_error["body"]
         )

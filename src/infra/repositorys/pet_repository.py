@@ -52,34 +52,45 @@ class PetRepository(PetRepositoryInterface):
         :return - List with PetsEntity selected
         """
 
-        query_data = None
+        try:
+            query_data = None
 
-        if pet_id and not user_id:
-            # Select pet by id
-            with DBConnectionHandler() as db_connection:
-                data = (
-                    db_connection.session.query(PetsEntity).filter_by(id=pet_id).one()
-                )
-                query_data = [data]
+            if pet_id and not user_id:
+                # Select pet by id
+                with DBConnectionHandler() as db_connection:
+                    data = (
+                        db_connection.session.query(PetsEntity)
+                        .filter_by(id=pet_id)
+                        .one()
+                    )
+                    query_data = [data]
 
-        elif not pet_id and user_id:
-            # Select pet by user_id
-            with DBConnectionHandler() as db_connection:
-                data = (
-                    db_connection.session.query(PetsEntity)
-                    .filter_by(user_id=user_id)
-                    .all()
-                )
-                query_data = data
+            elif not pet_id and user_id:
+                # Select pet by user_id
+                with DBConnectionHandler() as db_connection:
+                    data = (
+                        db_connection.session.query(PetsEntity)
+                        .filter_by(user_id=user_id)
+                        .all()
+                    )
+                    query_data = data
 
-        elif pet_id and user_id:
-            # Select pet by pet_id and user_id:
-            with DBConnectionHandler() as db_connection:
-                data = (
-                    db_connection.session.query(PetsEntity)
-                    .filter_by(id=pet_id, user_id=user_id)
-                    .one()
-                )
-                query_data = [data]
+            elif pet_id and user_id:
+                # Select pet by pet_id and user_id:
+                with DBConnectionHandler() as db_connection:
+                    data = (
+                        db_connection.session.query(PetsEntity)
+                        .filter_by(id=pet_id, user_id=user_id)
+                        .one()
+                    )
+                    query_data = [data]
 
-        return query_data
+            return query_data
+
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
+
+        return None

@@ -8,6 +8,12 @@ class HttpErrors:
         return {"status_code": 400, "body": {"error": "Bad Request"}}
 
     @staticmethod
+    def error_404():
+        """ Http error 404 - Not Found """
+
+        return {"status_code": 404, "body": {"error": "Not Found"}}
+
+    @staticmethod
     def error_422():
         """ Http error 422 - Unprocessable Entity """
 

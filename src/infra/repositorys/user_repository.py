@@ -1,6 +1,7 @@
 # pylint: disable=E1101
 
 from typing import List
+from sqlalchemy.orm.exc import NoResultFound
 from src.domain.models import Users
 from src.infra.entities import Users as UsersModel
 from src.infra.configs import DBConnectionHandler
@@ -31,8 +32,9 @@ class UserRepository(UserRepositoryInterface):
                     id=new_user.id, name=new_user.name, password=new_user.password
                 )
 
-            except:
+            except Exception as ex:
                 db_connection.session.rollback()
+                print(ex)
                 raise
             finally:
                 db_connection.session.close()
@@ -83,8 +85,11 @@ class UserRepository(UserRepositoryInterface):
 
             return query_data
 
-        except:
+        except NoResultFound:
+            return []
+        except Exception as ex:
             db_connection.session.rollback()
+            print(ex)
             raise
         finally:
             db_connection.session.close()

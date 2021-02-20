@@ -1,6 +1,7 @@
 # pylint: disable=E1101
 
 from typing import List
+from sqlalchemy.orm.exc import NoResultFound
 from src.infra.entities import Pets as PetsEntity
 from src.infra.configs import DBConnectionHandler
 from src.domain.models import Pets
@@ -87,6 +88,8 @@ class PetRepository(PetRepositoryInterface):
 
             return query_data
 
+        except NoResultFound:
+            return []
         except:
             db_connection.session.rollback()
             raise

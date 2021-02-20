@@ -34,7 +34,7 @@ def test_route():
     )
 
     # Testing output
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert "error" not in response.body
 
 
@@ -64,7 +64,7 @@ def test_route_without_age():
     )
 
     # Testing output
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert "error" not in response.body
 
 
@@ -92,7 +92,7 @@ def test_route_user_id_in_user_information():
     )
 
     # Testing output
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert "error" not in response.body
 
 

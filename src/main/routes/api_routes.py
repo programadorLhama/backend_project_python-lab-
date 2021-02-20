@@ -10,68 +10,116 @@ from src.main.composer import (
 api_routes_bp = Blueprint("api_routes", __name__)
 
 
-@api_routes_bp.route("/api/getUser", methods=["GET"])
+@api_routes_bp.route("/api/users", methods=["GET"])
 def get_user():
     """ get user route """
 
-    message = {}
     response = flask_adapter(request=request, api_route=find_user_composer())
 
+    message = []
     if response.status_code < 300:
         # If not error, format the message and return it
 
-        for count, element in enumerate(response.body):
-            message[count] = {"id": element.id, "name": element.name}
+        for element in response.body:
+            message.append(
+                {
+                    "type": "Users",
+                    "id": element.id,
+                    "attributes": {"name": element.name},
+                }
+            )
 
-        return jsonify({"message": message}), response.status_code
+        return jsonify({"data": message}), response.status_code
 
     # Handling Errors
-    return jsonify({"message": response.body["error"]}), response.status_code
+    return (
+        jsonify(
+            {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                }
+            }
+        ),
+        response.status_code,
+    )
 
 
-@api_routes_bp.route("/api/getPet", methods=["GET"])
+@api_routes_bp.route("/api/pets/", methods=["GET"])
 def get_pet():
     """ get pet route """
 
-    message = {}
     response = flask_adapter(request=request, api_route=find_pet_composer())
 
+    message = []
     if response.status_code < 300:
         # If not error, format the message and return it
 
-        for count, element in enumerate(response.body):
-            message[count] = {
-                "id": element.id,
-                "name": element.name,
-                "specie": element.specie.value,
-            }
+        for element in response.body:
+            message.append(
+                {
+                    "type": "Pets",
+                    "id": element.id,
+                    "attributes": {
+                        "name": element.name,
+                        "specie": element.specie.value,
+                        "age": element.age,
+                    },
+                    "relationships": {
+                        "Owner": {"type": "Users", "id": element.user_id}
+                    },
+                }
+            )
 
-        return jsonify({"message": message}), response.status_code
+        return jsonify({"data": message}), response.status_code
 
     # Handling Errors
-    return jsonify({"message": response.body["error"]}), response.status_code
+    return (
+        jsonify(
+            {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                }
+            }
+        ),
+        response.status_code,
+    )
 
 
-@api_routes_bp.route("/api/registerUser", methods=["POST"])
+@api_routes_bp.route("/api/users", methods=["POST"])
 def register_user():
     """ register user route """
 
     message = {}
     response = flask_adapter(request=request, api_route=register_user_composer())
-    print(response)
 
     if response.status_code < 300:
         # If not error, format the message and return it
 
-        message["0"] = {"id": response.body.id, "name": response.body.name}
+        message = {
+            "type": "Users",
+            "id": response.body.id,
+            "attributes": {"name": response.body.name},
+        }
 
-        return jsonify({"message": message}), response.status_code
+        return jsonify({"data": message}), response.status_code
 
     # Handling Errors
-    return jsonify({"message": response.body["error"]}), response.status_code
+    return (
+        jsonify(
+            {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                }
+            }
+        ),
+        response.status_code,
+    )
 
 
-@api_routes_bp.route("/api/registerPet", methods=["POST"])
+@api_routes_bp.route("/api/pets", methods=["POST"])
 def register_pet():
     """ register pet route """
 
@@ -82,13 +130,28 @@ def register_pet():
     if response.status_code < 300:
         # If not error, format the message and return it
 
-        message["0"] = {
+        message = {
+            "type": "Pets",
             "id": response.body.id,
-            "name": response.body.name,
-            "specie": response.body.specie,
+            "attributes": {
+                "name": response.body.name,
+                "specie": response.body.specie,
+                "age": response.body.age,
+            },
+            "relationships": {"Owner": {"type": "Users", "id": response.body.user_id}},
         }
 
-        return jsonify({"message": message}), response.status_code
+        return jsonify({"data": message}), response.status_code
 
     # Handling Errors
-    return jsonify({"message": response.body["error"]}), response.status_code
+    return (
+        jsonify(
+            {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                }
+            }
+        ),
+        response.status_code,
+    )

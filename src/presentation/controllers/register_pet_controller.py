@@ -63,7 +63,7 @@ class RegisterPetRoute(RouteInterface):
                     status_code=https_error["status_code"], body=https_error["body"]
                 )
 
-            return HttpResponse(status_code=200, body=response["Data"])
+            return HttpResponse(status_code=201, body=response["Data"])
 
         # If no body in http_request
         https_error = HttpErrors.error_400()

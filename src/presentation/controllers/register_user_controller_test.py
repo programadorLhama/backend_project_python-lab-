@@ -21,7 +21,7 @@ def test_route():
     assert register_user_use_case.registry_param["password"] == attributes["password"]
 
     # Testing output
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert "error" not in response.body
 
 
